@@ -5,14 +5,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Flight.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Flight.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+
+        private readonly FlightContext _context;
+
+        public HomeController(FlightContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var flights = from m in _context.AirRoutes
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                flights = flights.Where(s => s.From.Contains(searchString));
+            }
+
+            return View(await flights.ToListAsync());
         }
 
         public IActionResult About()
