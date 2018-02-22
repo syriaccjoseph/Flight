@@ -11,7 +11,7 @@ namespace Flight.Models
         {
             
         }
-        public DbSet<Flight> Flight { get; set; }
+        public DbSet<AirRoutes> AirRoutes { get; set; }
     }
 }
 

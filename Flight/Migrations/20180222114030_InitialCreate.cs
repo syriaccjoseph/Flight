@@ -10,7 +10,7 @@ namespace Flight.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Flight",
+                name: "AirRoutes",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
@@ -25,14 +25,14 @@ namespace Flight.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Flight", x => x.ID);
+                    table.PrimaryKey("PK_AirRoutes", x => x.ID);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Flight");
+                name: "AirRoutes");
         }
     }
 }

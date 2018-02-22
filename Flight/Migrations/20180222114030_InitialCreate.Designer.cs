@@ -11,7 +11,7 @@ using System;
 namespace Flight.Migrations
 {
     [DbContext(typeof(FlightContext))]
-    [Migration("20180221160649_InitialCreate")]
+    [Migration("20180222114030_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace Flight.Migrations
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
-            modelBuilder.Entity("Flight.Models.Flight", b =>
+            modelBuilder.Entity("Flight.Models.AirRoutes", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
@@ -42,7 +42,7 @@ namespace Flight.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Flight");
+                    b.ToTable("AirRoutes");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Flight.Models
 {
-    public class Flight
+    public class AirRoutes
     {
-        public Flight()
+        public AirRoutes()
         {
         }
 
