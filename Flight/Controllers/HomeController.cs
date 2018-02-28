@@ -19,14 +19,19 @@ namespace Flight.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string fromString, string toString, int NosValue, DateTime departDate, DateTime returnDate)
         {
             var flights = from m in _context.AirRoutes
                          select m;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(fromString) && !String.IsNullOrEmpty(toString) )
             {
-                flights = flights.Where(s => s.From.Contains(searchString));
+                //Console.WriteLine("Number of seats from client side :s " + NosValue);
+                flights = flights.Where(s => (s.From.Contains(fromString))
+                                        && s.To.Contains(toString)
+                                        && Int32.Parse(s.seatsAvailable) > NosValue
+                                        && DateTime.Compare(s.departing, departDate) < 0
+                                        && DateTime.Compare(s.arrival, returnDate) > 0);
             }
 
             return View(await flights.ToListAsync());
@@ -39,11 +44,39 @@ namespace Flight.Controllers
             return View();
         }
 
+        public IActionResult Search()
+        {
+            
+            return View();
+        }
+
+        public IActionResult Combined()
+        {
+
+            return View();
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
 
             return View();
+        }
+        public PartialViewResult List() {
+            var flights = from m in _context.AirRoutes
+                          select m;
+            /*
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                flights = flights.Where(s => s.From.Contains(searchString));
+            }
+            */
+
+            return PartialView("List", flights.ToListAsync());
+        }
+        public PartialViewResult SearchBar()
+        {
+            return PartialView();
         }
 
         public IActionResult Error()

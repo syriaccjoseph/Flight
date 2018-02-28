@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 namespace Flight.Models
 {
     public class AirRoutes
@@ -12,8 +13,13 @@ namespace Flight.Models
         public string To { get; set; }
         public int Stops { get; set; }
         public int Price { get; set; }
+
+        [Display(Name = "Departing Date"), DataType(DataType.Date)]
         public DateTime departing { get; set; }
+
+        [Display(Name = "Arrival Date"), DataType(DataType.Date)]
         public DateTime arrival { get; set; }
+
         public string seatsAvailable { get; set; }
     }
 }
