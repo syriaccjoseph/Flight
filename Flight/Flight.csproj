@@ -15,4 +15,15 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" /> 
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Views\Home\Group.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\AirRoutes\PartialView.cshtml" />
+    <Content Remove="Views\Shared\List.cshtml" />
+    <Content Remove="Views\Shared\PartialView.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="MinMax.cs" />
+  </ItemGroup>
 </Project>

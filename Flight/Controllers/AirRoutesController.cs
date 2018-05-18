@@ -48,6 +48,25 @@ namespace Flight.Controllers
             return View();
         }
 
+        public IActionResult List(String value)
+        {
+
+            if (value == "stops")
+            {
+                return View("List_stops");
+            } else if(value == "seats" ) 
+            {
+                return View("List_seats");
+            } else if (value == "price")
+            {
+                return View("List_price");
+            }
+
+            return View();
+
+        }
+
+
         // POST: AirRoutes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -63,6 +82,8 @@ namespace Flight.Controllers
             }
             return View(airRoutes);
         }
+
+
 
         // GET: AirRoutes/Edit/5
         public async Task<IActionResult> Edit(int? id)

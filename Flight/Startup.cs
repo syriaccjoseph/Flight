@@ -25,6 +25,13 @@ namespace Flight
         {
             services.AddDbContext<FlightContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                //options.Cookie.HttpOnly = true;
+                //options.IdleTimeout = TimeSpan.FromSeconds(10);
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +47,7 @@ namespace Flight
             }
 
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
