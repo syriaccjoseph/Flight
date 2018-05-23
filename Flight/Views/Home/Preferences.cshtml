@@ -21,39 +21,31 @@
             <option value="and">And - Min - Least of</option>
             <option value="or">Or - Max - Best of</option>
         </select>
+          for (var j = 0; j < Model.Filters[i].Prefs.Count; j++) 
+             {
         <div>
-        <select asp-for="@Model.Filters[i].Prefa" class="select1">
+        
+        <select asp-for="@Model.Filters[i].Prefs[j].Pref" class="select1">
             <option selected disabled> --  preference a -- </option>
             <option value="stops" >Stops</option>
             <option value="price">Price</option>
             <option value="seats">Seats Available</option>
         </select>  
         </div>
-        <div class="select-picker1">  </div>  
 
-        <div>
-        <select asp-for="@Model.Filters[i].Prefb" class="select2">
-            <option selected disabled> --  preference b -- </option>
-            <option value="stops" >Stops</option>
-            <option value="price">Price</option>
-            <option value="seats">Seats Available</option>
-        </select>  
-        </div>
-        <div class="select-picker2">  </div>
+         <div>
+            Min : <input asp-for="@Model.Filters[i].Prefs[j].MinMax.Min" />
+            Max : <input asp-for="@Model.Filters[i].Prefs[j].MinMax.Max" />
+        </div> 
+             }
 
-        <div>
-        <select asp-for="@Model.Filters[i].Prefc" class="select3">
-            <option selected disabled> --  preference b -- </option>
-            <option value="stops" >Stops</option>
-            <option value="price">Price</option>
-            <option value="seats">Seats Available</option>
-        </select>  
-        </div>
-        <div class="select-picker3">  </div>
+            
+        <br>
 
-        <br>
-        <br>
-        <br>
+
+        <br><br>
+          <button type="submit" name="submit" value="change">Change</button>
+        <br><br>
 
         <select name="and_or_split_1">
             <option selected disabled> -- And/Or -- </option>
@@ -61,67 +53,8 @@
             <option value="or">Or</option>
         </select>
 
-    <br><br>
-          <button type="submit" name="submit" value="change">Change</button>
-    <br><br>
   }
     <br><br>
           <button type="submit" name="submit" value="add">Add</button>
 </form>
 
-@section Scripts{  
-      
-    <script type="text/javascript">  
-  
-        $(document).ready(function () {  
-  
-            $(".select1").change(function (element) {  
-  
-                $.ajax({    
-                    url: '@Url.Action("List", "AirRoutes")',
-                    data: { value: $(this).val() },
-                    success: function (response) {  
-                        $(".select-picker1").html(response);  
-                    },  
-                    error: function (error) {  
-  
-                    }  
-                });  
-  
-            });
-
-                $(".select2").change(function (element) {  
-  
-                $.ajax({    
-                    url: '@Url.Action("List", "AirRoutes")',
-                    data: { value: $(this).val() },
-                    success: function (response) {  
-                        $(".select-picker2").html(response);  
-                    },  
-                    error: function (error) {  
-  
-                    }  
-                }) 
-  
-            });
-
-                $(".select3").change(function (element) {  
-  
-                $.ajax({    
-                    url: '@Url.Action("List", "AirRoutes")',
-                    data: { value: $(this).val() },
-                    success: function (response) {  
-                        $(".select-picker3").html(response);  
-                    },  
-                    error: function (error) {  
-  
-                    }  
-                });  
-  
-            });
-         $( "div#rangeslider" ).rangeslider();    
-         });  
-
-
-    </script>  
-}  

@@ -1,42 +1,14 @@
 ﻿<Properties StartupConfiguration="{EF6FCD82-5CA4-49CB-A7B3-8C740BA698D4}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Flight/Models/MinMaxModel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Flight/Models/GroupIndexViewModel.cs">
     <Files>
-      <File FileName="Flight/Program.cs" Line="1" Column="1" />
-      <File FileName="Flight/Controllers/HomeController.cs" Line="83" Column="86" />
-      <File FileName="Flight/Models/GroupIndexViewModel.cs" Line="27" Column="2" />
-      <File FileName="Flight/Views/AirRoutes/List_seats.cshtml" Line="8" Column="45" />
-      <File FileName="Flight/Views/AirRoutes/List_stops.cshtml" Line="6" Column="45" />
-      <File FileName="Flight/Views/AirRoutes/List_price.cshtml" Line="8" Column="10" />
-      <File FileName="Flight/MinMax.cs" Line="1" Column="1" />
-      <File FileName="Flight/Models/MinMaxModel.cs" Line="28" Column="2" />
+      <File FileName="Flight/Views/AirRoutes/List.cshtml" Line="2" Column="36" />
+      <File FileName="Flight/Controllers/HomeController.cs" Line="206" Column="45" />
+      <File FileName="Flight/Models/GroupIndexViewModel.cs" Line="25" Column="9" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Flight" expanded="True">
-            <Node name="Flight" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="MinMaxModel.cs" selected="True" />
-              </Node>
-              <Node name="Views" expanded="True">
-                <Node name="AirRoutes" expanded="True" />
-                <Node name="Home" expanded="True" />
-                <Node name="Shared" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/ajithjoseph/Projects/Flight/Flight/Controllers/HomeController.cs" relfile="Flight/Controllers/HomeController.cs" line="34" column="1" />
-      <Breakpoint enabled="false" file="/Users/ajithjoseph/Projects/Flight/Flight/Controllers/HomeController.cs" relfile="Flight/Controllers/HomeController.cs" line="79" column="1" />
-      <Breakpoint enabled="false" file="/Users/ajithjoseph/Projects/Flight/Flight/Controllers/HomeController.cs" relfile="Flight/Controllers/HomeController.cs" line="80" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.Flight PreferredExecutionTarget="MonoDevelop.Default" />

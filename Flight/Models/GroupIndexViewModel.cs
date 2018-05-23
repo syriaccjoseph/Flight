@@ -7,9 +7,8 @@ namespace Flight.Models
     {
         public List<Filter> Filters { get; set; }
 
-
-
-        public GroupIndexViewModel() {
+        public GroupIndexViewModel()
+        {
             Filters = new List<Filter>();
         }
 
@@ -18,15 +17,26 @@ namespace Flight.Models
     public class Filter
     {
         public int Id { get; set; }
-        public string Prefa { get; set; }
-        public string Prefb { get; set; }
-        public string Prefc { get; set; }
+        public List<Preference> Prefs { get; set; }
         public string AndOr { get; set; }
         public bool Selected { get; set; }
+
+        public Filter() {
+            Prefs = new List<Preference>();
+        }
+
     }
 
-    public class MinMax
+    public class Preference
     {
+        public String Pref { get; set; }
+        public MinMax MinMax { get; set; }
+    }
+
+    public class MinMax 
+    {
+        public int Min  { get; set; }
+        public int Max { get; set; }
         
     }
 }
