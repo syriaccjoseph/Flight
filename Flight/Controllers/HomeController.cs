@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 
+using System.Net.Http;
+
 namespace Flight.Controllers
 {
     public class HomeController : Controller
@@ -27,12 +29,7 @@ namespace Flight.Controllers
                          select m;
             var flightList = flights.ToList();
 
-            int stopmin = 0;
-            int stopmax = 1;
-            int seatmin = 0;
-            int seatmax = 1;
-            int pricemin = 0;
-            int pricemax = 1;
+            float stopmin = 0, stopmax = 1, seatmin = 0, seatmax = 1, pricemin = 0, pricemax = 1;
 
             if (!String.IsNullOrEmpty(fromString) && !String.IsNullOrEmpty(toString) )
             {
@@ -53,12 +50,15 @@ namespace Flight.Controllers
 
                 List<float[]> MinList = new List<float[]>();
                 List<float[]> MaxList = new List<float[]>();
+                List<float[]> CompromiseList = new List<float[]>();
 
 
                 if(pref != null) 
                 {
                     foreach (Preference preference in pref.Filters[0].Prefs) 
                     {
+                        // TODO : change it to check more filters. Now just 1.
+
                         if (preference.Pref == "stops") {
                             stopmin = preference.MinMax.Min;
                             stopmax = preference.MinMax.Max;
@@ -92,12 +92,12 @@ namespace Flight.Controllers
                             PriceValue = 1;                           
                         }
 
-                        PriceList.Add(new float[] { flightList[i].ID, PriceValue });
+                        PriceList.Add(new float[] { i, PriceValue });
 
                         //StopArray[i, 0] = flightList[i].ID;
                         //StopList calculation
 
-                        float StopValue = (float)((int)(flightList[i].Stops - stopmin) / (stopmax - stopmin));
+                        float StopValue = (float)(flightList[i].Stops - stopmin) / (stopmax - stopmin);
                         if (StopValue < 0)
                         {
                             StopValue = 0;
@@ -107,7 +107,7 @@ namespace Flight.Controllers
                             StopValue = 1;
                         }
 
-                        StopList.Add(new float[] { flightList[i].ID, StopValue });
+                        StopList.Add(new float[] { i, StopValue });
 
                         //SeatList calculation
 
@@ -122,7 +122,7 @@ namespace Flight.Controllers
                             SeatValue = 1;
                         }
 
-                        SeatList.Add(new float[] { flightList[i].ID, SeatValue });
+                        SeatList.Add(new float[] { i, SeatValue });
                     }
 
                     for (int i = 0; i < flightList.Count(); i++)
@@ -139,19 +139,25 @@ namespace Flight.Controllers
 
                         MaxList.Add(new float[] { PriceList[i][0], Math.Max(Math.Max(PriceList[i][1], StopList[i][1]), SeatList[i][1]) });
 
+                        CompromiseList.Add(new float[] { PriceList[i][0], (float)(PriceList[i][1] + StopList[i][1] + SeatList[i][1])/3 });
+
                     }
 
-                    MinList.Sort((row1, row2) => (int)((row1[1] * 10000.0) - (row2[1] * 10000.0)));
+                    MinList.Sort((row1, row2) => (int)((row2[1] * 10000.0) - (row1[1] * 10000.0)));
+
                     MaxList.Sort((row1, row2) => (int)((row2[1] * 10000.0) - (row1[1] * 10000.0)));
 
+                    CompromiseList.Sort((row1, row2) => (int)((row2[1] * 10000.0) - (row1[1] * 10000.0)));
                     List<AirRoutes> airRoutes = new List<AirRoutes>();
 
                     if (pref.Filters[0].AndOr == "and")
                     {
 
-                        foreach (float[] val in MinList)
+                        foreach (var val in MinList)
                         {
+                            //var a = (int)val[0];
                             airRoutes.Add(flightList[(int)val[0]]);
+                            //airRoutes.
                         }
                     }
                     if (pref.Filters[0].AndOr == "or")
@@ -167,6 +173,183 @@ namespace Flight.Controllers
                             airRoutes.Add(flightList[(int)val[0]]);
                         }
                     }
+
+                    if (pref.Filters[0].AndOr == "compromise")
+                    {
+
+                        //for (int i = 0; i < MaxArray.Length; i++)
+                        //{
+                        //    airRoutes.Add(flightList[MaxArray[i, 1]]);
+                        //}
+
+                        foreach (float[] val in CompromiseList)
+                        {
+                            airRoutes.Add(flightList[(int)val[0]]);
+                        }
+                    }
+                    return View(airRoutes);
+                } 
+
+                return View(flightList);
+            } else {
+                //Console.WriteLine("Number of seats from client side :s " + NosValue);
+
+                var value = HttpContext.Session.GetString("pref");
+                var pref = value == null ? null :
+                JsonConvert.DeserializeObject<GroupIndexViewModel>(value);
+
+               //flightList = flights.Where(s => (s.From.Contains(fromString))
+               //                            && s.To.Contains(toString)).ToList();
+                int count = flights.Count();
+
+                //todo: Using float[] for storing both id and val should be changed.
+                List<float[]> PriceList = new List<float[]>();
+                List<float[]> StopList = new List<float[]>();
+                List<float[]> SeatList = new List<float[]>();
+
+                List<float[]> MinList = new List<float[]>();
+                List<float[]> MaxList = new List<float[]>();
+                List<float[]> CompromiseList = new List<float[]>();
+
+
+                if (pref != null)
+                {
+                    foreach (Preference preference in pref.Filters[0].Prefs)
+                    {
+                        // TODO : change it to check more filters. Now just 1.
+
+                        if (preference.Pref == "stops")
+                        {
+                            stopmin = preference.MinMax.Min;
+                            stopmax = preference.MinMax.Max;
+                            System.Console.WriteLine("stops :" + stopmin);
+                        }
+                        else if (preference.Pref == "seats")
+                        {
+                            seatmin = preference.MinMax.Min;
+                            seatmax = preference.MinMax.Max;
+                            System.Console.WriteLine("seats :" + seatmin);
+                        }
+                        else if (preference.Pref == "price")
+                        {
+                            pricemin = preference.MinMax.Min;
+                            pricemax = preference.MinMax.Max;
+                            System.Console.WriteLine("price :" + pricemin);
+                        }
+                    }
+
+                    //Price Calc
+                    for (int i = 0; i < flightList.Count(); i++)
+                    {
+
+                        //PriceArray[i, 0] = flightList[i].ID;
+                        //PriceList calculation
+
+                        float PriceValue = (float)(flightList[i].Price - pricemin) / (pricemax - pricemin);
+                        if (PriceValue < 0)
+                        {
+                            PriceValue = 0;
+                        }
+                        else if (PriceValue > 1)
+                        {
+                            PriceValue = 1;
+                        }
+
+                        PriceList.Add(new float[] { i, PriceValue });
+
+                        //StopArray[i, 0] = flightList[i].ID;
+                        //StopList calculation
+
+                        float StopValue = (float)(flightList[i].Stops - stopmin) / (stopmax - stopmin);
+                        if (StopValue < 0)
+                        {
+                            StopValue = 0;
+                        }
+                        else if (StopValue > 1)
+                        {
+                            StopValue = 1;
+                        }
+
+                        StopList.Add(new float[] { i, StopValue });
+
+                        //SeatList calculation
+
+                        float SeatValue = (float.Parse(flightList[i].seatsAvailable) - seatmin) / (seatmax - seatmin);
+
+                        if (SeatValue < 0)
+                        {
+                            SeatValue = 0;
+                        }
+                        else if (SeatValue > 1)
+                        {
+                            SeatValue = 1;
+                        }
+
+                        SeatList.Add(new float[] { i, SeatValue });
+                    }
+
+                    for (int i = 0; i < flightList.Count(); i++)
+                    {
+                        //MinArray[i, 0] = PriceArray[i, 0];
+                        //MaxArray[i, 0] = PriceArray[i, 0];
+
+                        //MinArray[i, 1] = Math.Min(Math.Min(PriceArray[i, 1], StopArray[i, 1]), SeatArray[i, 1]);
+                        MinList.Add(new float[] { PriceList[i][0], Math.Min(Math.Min(PriceList[i][1], StopList[i][1]), SeatList[i][1]) });
+
+                        //Array.Sort(MinArray);
+                        //MaxArray[i, 1] = Math.Max(Math.Max(PriceArray[i, 1], StopArray[i, 1]), SeatArray[i, 1]);
+                        //Array.Sort(MaxArray);
+
+                        MaxList.Add(new float[] { PriceList[i][0], Math.Max(Math.Max(PriceList[i][1], StopList[i][1]), SeatList[i][1]) });
+
+                        CompromiseList.Add(new float[] { PriceList[i][0], (float)(PriceList[i][1] + StopList[i][1] + SeatList[i][1]) / 3 });
+
+                    }
+
+                    MinList.Sort((row1, row2) => (int)((row2[1] * 10000.0) - (row1[1] * 10000.0)));
+
+                    MaxList.Sort((row1, row2) => (int)((row2[1] * 10000.0) - (row1[1] * 10000.0)));
+
+                    CompromiseList.Sort((row1, row2) => (int)((row2[1] * 10000.0) - (row1[1] * 10000.0)));
+                    List<AirRoutes> airRoutes = new List<AirRoutes>();
+
+                    if (pref.Filters[0].AndOr == "and")
+                    {
+
+                        foreach (var val in MinList)
+                        {
+                            //var a = (int)val[0];
+                            airRoutes.Add(flightList[(int)val[0]]);
+                            //airRoutes.
+                        }
+                    }
+                    if (pref.Filters[0].AndOr == "or")
+                    {
+
+                        //for (int i = 0; i < MaxArray.Length; i++)
+                        //{
+                        //    airRoutes.Add(flightList[MaxArray[i, 1]]);
+                        //}
+
+                        foreach (float[] val in MaxList)
+                        {
+                            airRoutes.Add(flightList[(int)val[0]]);
+                        }
+                    }
+
+                    if (pref.Filters[0].AndOr == "compromise")
+                    {
+
+                        //for (int i = 0; i < MaxArray.Length; i++)
+                        //{
+                        //    airRoutes.Add(flightList[MaxArray[i, 1]]);
+                        //}
+
+                        foreach (float[] val in CompromiseList)
+                        {
+                            airRoutes.Add(flightList[(int)val[0]]);
+                        }
+                    }
                     return View(airRoutes);
                 }
 
@@ -174,7 +357,7 @@ namespace Flight.Controllers
             }
 
 
-            return View(flightList);
+            //return View(flightList);
         }
 
 
@@ -243,6 +426,51 @@ namespace Flight.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        //[HttpGet("[action]/{city}")]
+        //public async Task<IActionResult> City(string city)
+
+
+        public async Task<IActionResult> TimeTable(string airport)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+
+                    client.BaseAddress = new Uri("http://aviation-edge.com");
+
+                    //var rawWeather = JsonConvert.DeserializeObject<OpenWeatherResponse>(stringResult);
+
+                    //return Ok(new
+                    //{
+                    //    //Temp = rawWeather.Main.Temp,
+                    //    //Summary = string.Join(",", rawWeather.Weather.Select(x => x.Main)),
+                    //    //City = rawWeather.Name
+                    //});
+
+                    if (!String.IsNullOrEmpty(airport))
+                    {
+
+                        var response = await client.GetAsync($"/api/public/flights?key=fecfc5-f01ae4-a0a018-c4e442-1279f7&iataCode={airport}&type=departure");
+                        response.EnsureSuccessStatusCode();
+
+                        var stringResult = await response.Content.ReadAsStringAsync();
+
+                        Console.WriteLine("Server result " + stringResult);
+
+                        ViewData["Message"] = stringResult;
+
+                    }
+                        return View();
+
+                }
+                catch (HttpRequestException httpRequestException)
+                {
+                    return BadRequest($"Error getting weather from OpenWeather: {httpRequestException.Message}");
+                }
+            }
         }
     }
 

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Flight.Models.AirRoutes>
+@{
+    ViewData["Title"] = "TimeTable Page";
+}
+
+
+<br>
+<br>
+
+<form asp-controller="" asp-action="TimeTable">
+    <p>
+        From: <input type="text" name="airport">
+
+        <input type="submit" value="Filter" />
+
+    </p>
+</form>
+
+<h3>@ViewData["Message"]</h3>
