@@ -1,0 +1,204 @@
+﻿
+<br>
+<div class="well">
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="input-group">
+
+                <span class="input-group-addon" id="basic-addon1">from</span>
+                <input type="text" class="form-control" placeholder="Boston" aria-describedby="basic-addon1">
+
+            </div>
+        </div>
+
+        <div class="col-lg-2">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">to</span>
+                <input type="text" class="form-control" placeholder="Cochin" aria-describedby="basic-addon1">
+
+            </div>
+        </div>
+
+
+        <div class='col-lg-4'>
+            <div class="input-group">
+
+                <span class="input-group-addon" id="basic-addon1">on date:</span>
+                <input type='text' class="form-control" id='datetimepicker4' />
+            </div>
+        </div>
+        <script type="text/javascript">$(function() {
+                $('#datetimepicker4').datetimepicker();
+});</script>
+
+        <div class='col-lg-4'>
+            <div class="input-group">
+
+                <span class="input-group-addon" id="basic-addon1">to date:</span>
+                <input type='text' class="form-control" id='datetimepicker5' />
+            </div>
+        </div>
+        <script type="text/javascript">$(function() {
+                $('#datetimepicker5').datetimepicker();
+});</script>
+
+    </div>
+
+    <br>
+
+    <div class="row">
+
+        <div class="col-lg-2">
+            <div class="input-group-btn">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Round Trip
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Round Trip</a></li>
+                        <li><a href="#">One way</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2">
+            <div class="input-group-btn">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        No of Passengers
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2">
+
+            <div class="input-group-btn">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Economy
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Economy</a></li>
+                        <li><a href="#">Premium</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class=well>
+    <div class="row">
+        <div class="col-lg-4">
+            Price: <b>0 </b>  <input id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="170" data-slider-step="1" data-slider-value="14" />
+            <b>$170</b>
+        </div>
+        <div class="col-lg-4">
+            Stops: <b>0 </b>  <input id="ex2" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="3" data-slider-step="1" data-slider-value="1" />
+            <b>3</b>
+        </div>
+        <div class="col-lg-4">
+            Reputation: <b>3 </b>  <input id="ex3" data-slider-id='ex1Slider' type="text" class="span2" value="" data-slider-min="3" data-slider-max="7" data-slider-step="1" data-slider-value="[4,5]" />
+            <b>7</b>
+        </div>
+        <script type="text/javascript">$('#ex1').slider({
+                formatter: function(value) {
+                    return 'Current value: ' + value;
+                }
+});</script>
+        <script type="text/javascript">$('#ex2').slider({
+                formatter: function(value) {
+                    return 'Current value: ' + value;
+                }
+});</script>
+        <script type="text/javascript">$('#ex3').slider({
+                formatter: function(value) {
+                    return 'Current value: ' + value;
+                }
+});</script>
+    </div>
+
+
+    <br>
+
+    <div class="input-group">
+        <span class="input-group-addon" id="sizing-addon1">non functionals</span>
+        <input type="text" class="form-control" placeholder="price and stops or price and seats" aria-describedby="sizing-addon1">
+    </div>
+
+</div>
+
+
+<table class="table table-borderless table-hover">
+    <thead>
+        <tr>
+            <th scope="col">airline</th>
+            <th scope="col">time</th>
+            <th scope="col">duration</th>
+            <th scope="col">stops</th>
+            <th scope="col">price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td scope="row">getblue</td>
+            <td>5:30am to 6:49am</td>
+            <td>2h 39m</td>
+            <td>1 stop</td>
+            <td>$191</td>
+        </tr>
+        <tr>
+            <td scope="row">american</td>
+            <td>6:20am to 7:29am</td>
+            <td>3h 15m</td>
+            <td>1 stop</td>
+            <td>$227</td>
+        </tr>
+        <tr>
+            <td scope="row">delta</td>
+            <td>7:10am to 3:59am</td>
+            <td>6h 53m</td>
+            <td>Non stop</td>
+            <td>$146</td>
+        </tr>
+        <tr>
+            <td scope="row">getblue</td>
+            <td>5:30am to 6:49am</td>
+            <td>2h 39m</td>
+            <td>2 stops</td>
+            <td>$191</td>
+        </tr>
+        <tr>
+            <td scope="row">american</td>
+            <td>6:20am to 7:29am</td>
+            <td>3h 15m</td>
+            <td>Non stop</td>
+            <td>$227</td>
+        </tr>
+        <tr>
+            <td scope="row">delta</td>
+            <td>7:10am to 3:59am</td>
+            <td>6h 53m</td>
+            <td>3 stops</td>
+            <td>$146</td>
+        </tr>
+
+
+    </tbody>
+
+</table>

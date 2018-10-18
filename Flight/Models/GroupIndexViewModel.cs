@@ -19,6 +19,7 @@ namespace Flight.Models
         public int Id { get; set; }
         public List<Preference> Prefs { get; set; }
         public string AndOr { get; set; }
+        public string GlobalAndOr { get; set; }
         public bool Selected { get; set; }
 
         public Filter() {

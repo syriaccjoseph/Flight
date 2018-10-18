@@ -48,7 +48,7 @@
           <button type="submit" name="submit" value="change">Change</button>
         <br><br>
 
-        <select name="and_or_split_1">
+        <select asp-for="@Model.Filters[i].GlobalAndOr">
             <option selected disabled> -- And/Or -- </option>
             <option value="and">And</option>
             <option value="or">Or</option>
