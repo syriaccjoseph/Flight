@@ -1,10 +1,11 @@
 ﻿grammar PreferenceLanguage;
- 
+
 /*
  * Parser Rules
  */
  
-preferenceSet       : preference SEPARATOR preference;
+
+preferenceSet       :   preference;
 preference          : '"' .*? '"' ;
 
  
@@ -12,4 +13,7 @@ preference          : '"' .*? '"' ;
  * Lexer Rules
  */
  
-SEPARATOR           : 'AND' | 'OR' | 'COMPROMISE' ;
+ 
+ 
+SEPARATOR           : 'AND' | 'and' | 'OR' | 'or'| 'COMPROMISE' | 'compromise';
+

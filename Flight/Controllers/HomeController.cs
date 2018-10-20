@@ -8,6 +8,8 @@ using Flight.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
+using Flight.Antlr;
+using Antlr4.Runtime;
 
 using System.Net.Http;
 
@@ -464,6 +466,7 @@ namespace Flight.Controllers
 
         public IActionResult Preferences(GroupIndexViewModel model, String submit, int minseats, int maxseats)
         {
+
             var value = HttpContext.Session.GetString("pref");
             var pref = value == null ? new GroupIndexViewModel() :
                 JsonConvert.DeserializeObject<GroupIndexViewModel>(value);
@@ -472,6 +475,7 @@ namespace Flight.Controllers
 
             if (submit == "add" && pref.Filters.Count < 2) 
             {
+
                     Filter filter = new Filter();
                     Preference preference1 = new Preference();
                     Preference preference2 = new Preference();
@@ -561,11 +565,46 @@ namespace Flight.Controllers
             }
         }
 
-        public ActionResult NewDesign()
+        public ActionResult NewDesign(String preference)
         {
-           
+
+            if (!String.IsNullOrEmpty(preference) )
+            {
+
+                AntlrInputStream inputStream = new AntlrInputStream(preference);
+                PreferenceLanguageLexer lexer = new PreferenceLanguageLexer(inputStream);
+                CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
+
+                PreferenceLanguageParser parser = new PreferenceLanguageParser(commonTokenStream);
+                PreferenceLanguageParser.PreferenceContext preferencContext = parser.preference();
+
+                PreferenceVisitor visitor = new PreferenceVisitor();
+                visitor.Visit(preferencContext);
+
+                foreach (var pref in visitor.Preferences)
+                {
+                    Console.WriteLine("pref", pref.PreferenceParsedText);
+                }
+            }
+
+
+            
+
+            //Prefe
+            //SpeakParser.LineContext context
+            //Pre SpeakLexer.NameContext name = context.name();
+            //OpinionContext opinion = context.opinion();
+
+            //SpeakLine line = new SpeakLine() { Person = name.GetText(), Text = opinion.GetText().Trim('"') };
+            //Lines.Add(line);
+
+            //line;
+            //Prefere
+
+            //Console.WriteLine("preferences" + preference);
 
             return View();
+
         }
 
     }

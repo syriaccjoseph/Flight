@@ -1,17 +1,16 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flight", "Flight\Flight.csproj", "{EF6FCD82-5CA4-49CB-A7B3-8C740BA698D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flight", "Flight\Flight.csproj", "{641B26FF-6C24-45FF-869D-0FE3875FF9CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		AntlrBuild|Any CPU = AntlrBuild|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EF6FCD82-5CA4-49CB-A7B3-8C740BA698D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF6FCD82-5CA4-49CB-A7B3-8C740BA698D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF6FCD82-5CA4-49CB-A7B3-8C740BA698D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF6FCD82-5CA4-49CB-A7B3-8C740BA698D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{641B26FF-6C24-45FF-869D-0FE3875FF9CA}.AntlrBuild|Any CPU.ActiveCfg = AntlrBuild|Any CPU
+		{641B26FF-6C24-45FF-869D-0FE3875FF9CA}.AntlrBuild|Any CPU.Build.0 = AntlrBuild|Any CPU
 	EndGlobalSection
 EndGlobal

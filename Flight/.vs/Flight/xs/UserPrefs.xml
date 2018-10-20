@@ -1,20 +1,28 @@
-﻿<Properties StartupConfiguration="{64BF6888-0D2D-4C7D-9B68-65F60556B643}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/GroupIndexViewModel.cs">
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Flight.csproj">
     <Files>
-      <File FileName="Views/Home/Preferences.cshtml" Line="58" Column="4" />
-      <File FileName="Controllers/HomeController.cs" Line="8" Column="1" />
-      <File FileName="Views/Home/Index.cshtml" Line="7" Column="1" />
-      <File FileName="Views/Home/TimeTable.cshtml" Line="10" Column="46" />
-      <File FileName="Models/GroupIndexViewModel.cs" Line="1" Column="1" />
+      <File FileName="Flight.csproj" Line="1263" Column="3" />
+      <File FileName="Antlr/PreferenceLangauage.g4" Line="7" Column="21" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Option id="ShowAllFiles" value="True" />
+          <Node name="Flight" expanded="True">
+            <Node name="Antlr" expanded="True" />
+            <Node name="Flight" expanded="True">
+              <Node name="Antlr" expanded="True" />
+              <Node name="Flight.csproj" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint enabled="false" file="/Users/ajithjoseph/Projects/Flight/Flight/Controllers/HomeController.cs" relfile="Controllers/HomeController.cs" line="151" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Flight PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>
