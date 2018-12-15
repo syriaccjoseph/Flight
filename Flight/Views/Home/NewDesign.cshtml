@@ -1,12 +1,34 @@
-﻿
+﻿@*<script src='~/lib/requirejs/require.js'></script>
+    <script type="text/javascript">
+
+        requirejs.config({baseUrl: '../lib/antlr4/'});
+        require(['index']);
+
+
+    </script>*@
+
 <script src='~/lib/requirejs/require.js'></script>
-<script type="text/javascript">
-
-    requirejs.config({baseUrl: 'lib/antlr4/'});
-    require(['index']);
 
 
+@section scripts
+{
+<script>
+        require(["../js/main"],
+            function () {
+                require(["antlr4"],
+                    function (antlr4) {
+
+                        var input = "your text to parse here"
+                        @*var chars = new antlr4.InputStream(input);*@
+                        console.log(input);
+
+                    }
+                );
+            }
+        );
 </script>
+}
+
 
 
 <br>

@@ -14,6 +14,13 @@
     <Content Remove="wwwroot\js\requirejs\package.json" />
     <Content Remove="wwwroot\js\requirejs\README.md" />
     <Content Remove="wwwroot\js\requirejs\require.js" />
+    <Content Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguage.interp" />
+    <Content Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguage.tokens" />
+    <Content Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguageLexer.interp" />
+    <Content Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguageLexer.js" />
+    <Content Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguageLexer.tokens" />
+    <Content Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguageListener.js" />
+    <Content Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguageParser.js" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.2" />
@@ -24,8 +31,7 @@
     
   <ItemGroup>
     <Folder Include="obj\Release\netcoreapp2.1\" />
-    <Folder Include="Views\Home\lib\" />
-    <Folder Include="Views\Home\lib\antlr4\" />
+    <Folder Include="wwwroot\lib\PreferenceLanguage\" />
   </ItemGroup>
   
          
@@ -46,52 +52,10 @@
     <None Remove="Views\Home\lib\antlr4\atn\ATNConfigSet.js" />
     <None Remove="Views\Home\lib\antlr4\atn\ATNDeserializationOptions.js" />
     <None Remove="Views\Home\lib\antlr4\atn\ATNDeserializer.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\ATNSimulator.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\ATNState.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\ATNType.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\index.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\LexerAction.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\LexerActionExecutor.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\LexerATNSimulator.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\ParserATNSimulator.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\PredictionMode.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\SemanticContext.js" />
-    <None Remove="Views\Home\lib\antlr4\atn\Transition.js" />
-    <None Remove="Views\Home\lib\antlr4\BufferedTokenStream.js" />
-    <None Remove="Views\Home\lib\antlr4\CharStreams.js" />
-    <None Remove="Views\Home\lib\antlr4\CommonTokenFactory.js" />
-    <None Remove="Views\Home\lib\antlr4\CommonTokenStream.js" />
-    <None Remove="Views\Home\lib\antlr4\dfa\DFA.js" />
-    <None Remove="Views\Home\lib\antlr4\dfa\DFASerializer.js" />
-    <None Remove="Views\Home\lib\antlr4\dfa\DFAState.js" />
-    <None Remove="Views\Home\lib\antlr4\dfa\index.js" />
-    <None Remove="Views\Home\lib\antlr4\error\DiagnosticErrorListener.js" />
-    <None Remove="Views\Home\lib\antlr4\error\ErrorListener.js" />
-    <None Remove="Views\Home\lib\antlr4\error\Errors.js" />
-    <None Remove="Views\Home\lib\antlr4\error\ErrorStrategy.js" />
-    <None Remove="Views\Home\lib\antlr4\error\index.js" />
-    <None Remove="Views\Home\lib\antlr4\FileStream.js" />
-    <None Remove="Views\Home\lib\antlr4\index.js" />
-    <None Remove="Views\Home\lib\antlr4\InputStream.js" />
-    <None Remove="Views\Home\lib\antlr4\IntervalSet.js" />
-    <None Remove="Views\Home\lib\antlr4\Lexer.js" />
-    <None Remove="Views\Home\lib\antlr4\LL1Analyzer.js" />
-    <None Remove="Views\Home\lib\antlr4\Parser.js" />
-    <None Remove="Views\Home\lib\antlr4\ParserRuleContext.js" />
-    <None Remove="Views\Home\lib\antlr4\polyfills\codepointat.js" />
-    <None Remove="Views\Home\lib\antlr4\polyfills\fromcodepoint.js" />
-    <None Remove="Views\Home\lib\antlr4\PredictionContext.js" />
-    <None Remove="Views\Home\lib\antlr4\README.md" />
-    <None Remove="Views\Home\lib\antlr4\Recognizer.js" />
-    <None Remove="Views\Home\lib\antlr4\RuleContext.js" />
-    <None Remove="Views\Home\lib\antlr4\Token.js" />
-    <None Remove="Views\Home\lib\antlr4\tree\index.js" />
-    <None Remove="Views\Home\lib\antlr4\tree\Tree.js" />
-    <None Remove="Views\Home\lib\antlr4\tree\Trees.js" />
-    <None Remove="Views\Home\lib\antlr4\Utils.js" />
   </ItemGroup>
   <ItemGroup>
     <Antlr4 Remove="wwwroot\js\PreferenceLanguage.g4" />
+    <Antlr4 Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguage.g4" />
   </ItemGroup>
   <ItemGroup>
     <Antlr4 Include="Antlr\C3PO.g4">
@@ -156,156 +120,7 @@
     <None Include="node_modules\requirejs\package.json" />
     <None Include="node_modules\requirejs\require.js" />
     <None Include="node_modules\requirejs\bin\r.js" />
-    <None Include="wwwroot\js\PreferenceLanguage.g4" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\lib\antlr4\.DS_Store">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\ATN.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\ATNConfig.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\ATNConfigSet.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\ATNDeserializationOptions.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\ATNDeserializer.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\ATNSimulator.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\ATNState.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\ATNType.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\index.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\LexerAction.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\LexerActionExecutor.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\LexerATNSimulator.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\ParserATNSimulator.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\PredictionMode.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\SemanticContext.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\atn\Transition.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\BufferedTokenStream.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\CharStreams.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\CommonTokenFactory.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\CommonTokenStream.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\dfa\DFA.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\dfa\DFASerializer.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\dfa\DFAState.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\dfa\index.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\error\DiagnosticErrorListener.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\error\ErrorListener.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\error\Errors.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\error\ErrorStrategy.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\error\index.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\FileStream.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\index.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\InputStream.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\IntervalSet.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\Lexer.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\LL1Analyzer.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\Parser.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\ParserRuleContext.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\polyfills\codepointat.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\polyfills\fromcodepoint.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\PredictionContext.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\README.md">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\Recognizer.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\RuleContext.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\Token.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\tree\index.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\tree\Tree.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\tree\Trees.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="Views\Home\lib\antlr4\Utils.js">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
+    <None Include="wwwroot\lib\PreferenceLanguage\PreferenceLanguage.g4" />
   </ItemGroup>
       <PropertyGroup>
       <!-- See the release notes for 4.6.5-beta001 for an explanation of this optional property -->
