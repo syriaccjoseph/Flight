@@ -570,21 +570,35 @@ namespace Flight.Controllers
 
             if (!String.IsNullOrEmpty(preference) )
             {
+            
+                    AntlrInputStream inputStream = new AntlrInputStream(preference);
+                    PreferenceLanguageLexer lexer = new PreferenceLanguageLexer(inputStream);
 
-                AntlrInputStream inputStream = new AntlrInputStream(preference);
-                PreferenceLanguageLexer lexer = new PreferenceLanguageLexer(inputStream);
-                CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
+                    CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
 
-                PreferenceLanguageParser parser = new PreferenceLanguageParser(commonTokenStream);
-                PreferenceLanguageParser.PreferenceContext preferencContext = parser.preference();
+                    PreferenceLanguageParser parser = new PreferenceLanguageParser(commonTokenStream);
 
-                PreferenceVisitor visitor = new PreferenceVisitor();
-                visitor.Visit(preferencContext);
+                    BaseErrorListener baseErrorListener = new BaseErrorListener();
+                parser.AddErrorListener(new BaseErrorListener());
 
-                foreach (var pref in visitor.Preferences)
-                {
-                    Console.WriteLine("pref", pref.PreferenceParsedText);
-                }
+                    try
+                    {
+                        PreferenceLanguageParser.PreferenceSetContext preferenceSetContext = parser.preferenceSet();
+
+                        PreferenceVisitor visitor = new PreferenceVisitor();
+                        visitor.Visit(preferenceSetContext);
+
+                        foreach (var pref in visitor.Preferences)
+                        {
+                            Console.WriteLine("pref " + pref.PreferenceParsedText);
+                        }
+                     }
+                    catch(Exception ex)
+                    {
+                         Console.WriteLine(ex);
+                    }
+
+
             }
 
 
