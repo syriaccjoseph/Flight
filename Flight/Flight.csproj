@@ -57,11 +57,19 @@
     <Antlr4 Remove="wwwroot\js\PreferenceLanguage.g4" />
     <Antlr4 Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguage.g4" />
   </ItemGroup>
+    
   <ItemGroup>
     <Antlr4 Include="Antlr\C3PO.g4">
       <Generator>Build:Compile</Generator>
     </Antlr4>
   </ItemGroup>
+    
+  <ItemGroup>
+    <Antlr4 Include="Antlr\PreferenceLanguage.g4">
+      <Generator>Build:Compile</Generator>
+    </Antlr4>
+  </ItemGroup>
+    
   <ItemGroup>
     <None Include="node_modules\.DS_Store" />
     <None Include="node_modules\.bin\r.js" />

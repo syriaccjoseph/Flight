@@ -7,30 +7,20 @@
 
  
     preferenceSet       :   setFormat1
-                          | setFormat2
-                          | setFormat3
-                          | preferenceSet SEPARATOR preferenceSet;
+                          | setFormat2;
 
-
-    setFormat1          : '(' (preference SEPARATOR preference) ')';
-                        
-    setFormat2          : setFormat1 SEPARATOR preference;
-
-    setFormat3          : preference SEPARATOR setFormat1;
-                        
-    preference          :   TEXT ;
+    setFormat1          : '(' (preference SEPARATOR preference) ')';       
+    setFormat2          : setFormat1 (SEPARATOR setFormat1)* (SEPARATOR preference)?;
+    
+    preference          : TEXT ;
     
 /*
  * Lexer Rules
  */
  
-NAME : 'ADSFA';
-// and may follow with any number of alphanumerical characters"
 
-SEPARATOR           : 'AND' | 'and' | 'OR' | 'or' | 'compromise' | 'COMPROMISE';
-TEXT
-    : [a-z]*
-    ;
+SEPARATOR           : 'AND' | 'and' | 'OR' | 'or' | 'compromise' | 'COMPROMISE' ;
+TEXT                : ('a'.. 'z')+ ;
 
 
-WHITESPACE          : (' '|'\t')+ -> skip ;
+WHITESPACE          : (' ' | '\t')+ -> skip ;
