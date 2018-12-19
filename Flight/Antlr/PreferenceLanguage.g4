@@ -7,12 +7,12 @@
 
 
  
-preference            : '(' preference ')'
-                      | preference AND preference
-                      | preference OR preference
-                      | preference COMPROMISE preference
-                      | PREFERENCE_NAME  FROM   FROM_VAL TO  FROM_VAL ;
-                          
+preference            : '(' preference ')'                                      #parenthesisPreference
+                      | preference AND preference                               #andPreference
+                      | preference OR preference                                #orPreference
+                      | preference COMPROMISE preference                        #compromisePreference
+                      | PREFERENCE_NAME  FROM  VAL TO  VAL                      #atomPreference
+                      ;    
     
 /*
  * Lexer Rules
@@ -29,7 +29,7 @@ COMPROMISE                  : 'COMPROMISE' | 'compromise' ;
 PREFERENCE_NAME             : [a-zA-Z]+ ;
 
                             
-FROM_VAL                    : ('0' .. '9')+ ;
+VAL                    : ('0' .. '9')+ ;
 
 
 WHITESPACE          : (' ' | '\t')+ -> skip ;

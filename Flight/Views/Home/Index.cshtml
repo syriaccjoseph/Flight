@@ -1,60 +1,184 @@
 ﻿@model IEnumerable<Flight.Models.AirRoutes>
+@*<script src='~/lib/requirejs/require.js'></script>
+    <script type="text/javascript">
 
-@{
-    ViewData["Title"] = "Home Page";
+        requirejs.config({baseUrl: '../lib/antlr4/'});
+        require(['index']);
+
+
+    </script>*@
+
+<script src='~/lib/requirejs/require.js'></script>
+
+
+@section scripts
+    {
+    <script>
+        require(["../js/main"],
+            function () {
+                require(["antlr4"],
+                    function (antlr4) {
+
+                        var input = "your text to parse here"
+                        @*var chars = new antlr4.InputStream(input);*@
+                        console.log(input);
+
+                    }
+                );
+            }
+        );
+    </script>
 }
 
 
-<br>
-<br>
 
+<br>
 <form asp-controller="" asp-action="Index">
-    <p>
-        From: <input type="text" name="fromString">
+    <div class="well">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="input-group">
 
-        To: <input type="text" name="toString">
+                    <span class="input-group-addon" id="basic-addon1">from</span>
+                    <input type="text" class="form-control" placeholder="Boston" name="fromString" aria-describedby="basic-addon1">
 
-        Number of Seats: <input type="text" name="NosValue">
+                </div>
+            </div>
 
-        Depart: <input type="date" name="departDate">
+            <div class="col-lg-2">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">to</span>
+                    <input type="text" class="form-control" placeholder="Cochin" name="toString" aria-describedby="basic-addon1" />
 
-        Return: <input type="date" name="returnDate">
-        <input type="submit" value="Filter" />
-        
-    </p>
+                </div>
+            </div>
+
+
+            <div class='col-lg-4'>
+                <div class="input-group">
+
+                    <span class="input-group-addon" id="basic-addon1">on date:</span>
+                    <input type='text' class="form-control" id='datetimepicker4' />
+                </div>
+            </div>
+            <script type="text/javascript">
+$(function() {
+                $('#datetimepicker4').datetimepicker();
+});</script>
+
+            <div class='col-lg-4'>
+                <div class="input-group">
+
+                    <span class="input-group-addon" id="basic-addon1">to date:</span>
+                    <input type='text' class="form-control" id='datetimepicker5' />
+                </div>
+            </div>
+            <script type="text/javascript">
+$(function() {
+                $('#datetimepicker5').datetimepicker();
+});</script>
+
+        </div>
+
+        <br>
+
+        <div class="row">
+
+            <div class="col-lg-2">
+                <div class="input-group-btn">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Round Trip
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Round Trip</a></li>
+                            <li><a href="#">One way</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+                <div class="input-group-btn">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            No of Passengers
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+
+                <div class="input-group-btn">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Economy
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">Economy</a></li>
+                            <li><a href="#">Premium</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class=well>
+
+
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon1">non functionals</span>
+                    <input type="text" class="form-control" name="preference" placeholder="((price and stops) or (price and seats))" aria-describedby="sizing-addon1">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+
+        </div>
+
+
+
+    </div>
 </form>
 
-<table class="table">
+<table class="table table-borderless table-hover">
     <thead>
         <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.From)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.To)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Stops)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.departing)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.arrival)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.seatsAvailable)
-                </th>
-            <th></th>
+            <th scope="col">@Html.DisplayNameFor(model => model.From)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.To)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.Stops)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.Price)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.departing)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.arrival)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.seatsAvailable)</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
-            <td>
+            <td scope="row">
                 @Html.DisplayFor(modelItem => item.From)
             </td>
             <td>
@@ -75,12 +199,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.seatsAvailable)
             </td>
-            <td>
-                <a asp-controller="AirRoutes" asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-controller="AirRoutes" asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-controller="AirRoutes" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
         </tr>
-}
+        }
+
     </tbody>
+
 </table>

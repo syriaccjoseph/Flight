@@ -25,15 +25,15 @@ namespace Flight.Controllers
             _context = context;
         }
 
-        public IActionResult Index(string fromString, string toString, int NosValue, DateTime departDate, DateTime returnDate)
+        public IActionResult NewDesign(string fromString, string toString, int NosValue, DateTime departDate, DateTime returnDate)
         {
             var flights = from m in _context.AirRoutes
-                         select m;
+                          select m;
             var flightList = flights.ToList();
 
             float stopmin = 0, stopmax = 1, seatmin = 0, seatmax = 1, pricemin = 0, pricemax = 1;
 
-            if (!String.IsNullOrEmpty(fromString) && !String.IsNullOrEmpty(toString) )
+            if (!String.IsNullOrEmpty(fromString) && !String.IsNullOrEmpty(toString))
             {
                 //Console.WriteLine("Number of seats from client side :s " + NosValue);
 
@@ -66,7 +66,7 @@ namespace Flight.Controllers
                 List<float[]> FinalList1 = new List<float[]>();
                 List<float[]> FinalList2 = new List<float[]>();
 
-                List<float[]> GlobalList= new List<float[]>();
+                List<float[]> GlobalList = new List<float[]>();
 
 
                 if (pref != null)
@@ -218,7 +218,8 @@ namespace Flight.Controllers
 
 
 
-                    if(pref.Filters.Count() > 1) {
+                    if (pref.Filters.Count() > 1)
+                    {
 
                         System.Console.WriteLine("filter count :" + pref.Filters.Count());
 
@@ -416,7 +417,7 @@ namespace Flight.Controllers
 
                         for (int i = 0; i < flightList.Count(); i++)
                         {
-                            
+
                             System.Console.WriteLine("global list :" + GlobalList[i][0] + "  " + GlobalList[i][1]);
 
 
@@ -432,16 +433,13 @@ namespace Flight.Controllers
                         for (int i = 0; i < flightList.Count(); i++)
                         {
 
-                            System.Console.WriteLine("final 2 list :" + FinalList2[i][0] + "  " +  FinalList2[i][1]);
+                            System.Console.WriteLine("final 2 list :" + FinalList2[i][0] + "  " + FinalList2[i][1]);
 
                         }
 
-                }
-
-
- 
+                    }
                     return View(airRoutes);
-                } 
+                }
 
                 return View(flightList);
             }
@@ -458,11 +456,6 @@ namespace Flight.Controllers
             return View();
         }
 
-        public IActionResult Search()
-        {
-            
-            return View();
-        }
 
         public IActionResult Preferences(GroupIndexViewModel model, String submit, int minseats, int maxseats)
         {
@@ -473,21 +466,21 @@ namespace Flight.Controllers
 
             System.Console.WriteLine("min seats and max seats " + minseats + maxseats);
 
-            if (submit == "add" && pref.Filters.Count < 2) 
+            if (submit == "add" && pref.Filters.Count < 2)
             {
 
-                    Filter filter = new Filter();
-                    Preference preference1 = new Preference();
-                    Preference preference2 = new Preference();
-                    Preference preference3 = new Preference();
-                    filter.Prefs.Add(preference1);
-                    filter.Prefs.Add(preference2);
-                    filter.Prefs.Add(preference3);
+                Filter filter = new Filter();
+                Preference preference1 = new Preference();
+                Preference preference2 = new Preference();
+                Preference preference3 = new Preference();
+                filter.Prefs.Add(preference1);
+                filter.Prefs.Add(preference2);
+                filter.Prefs.Add(preference3);
 
-                    pref.Filters.Add(filter);
-                    System.Console.WriteLine("THE NUMBER OF FILTERS : " + pref.Filters.Count);
-                    HttpContext.Session.SetString("pref", JsonConvert.SerializeObject(pref));
-                
+                pref.Filters.Add(filter);
+                System.Console.WriteLine("THE NUMBER OF FILTERS : " + pref.Filters.Count);
+                HttpContext.Session.SetString("pref", JsonConvert.SerializeObject(pref));
+
             }
 
             if (submit == "change")
@@ -509,7 +502,8 @@ namespace Flight.Controllers
             return View();
         }
 
-        public ActionResult PartiaView() {
+        public ActionResult PartiaView()
+        {
 
 
             return View();
@@ -555,7 +549,7 @@ namespace Flight.Controllers
                         ViewData["Message"] = stringResult;
 
                     }
-                        return View();
+                    return View();
 
                 }
                 catch (HttpRequestException httpRequestException)
@@ -565,12 +559,21 @@ namespace Flight.Controllers
             }
         }
 
-        public ActionResult NewDesign(String preference)
+        public ActionResult Index(string fromString, string toString, int NosValue, DateTime departDate, DateTime returnDate, string preference)
         {
+            var flights = from m in _context.AirRoutes
+                          select m;
+            var flightList = flights.ToList();
 
-            if (!String.IsNullOrEmpty(preference) )
+            if (!String.IsNullOrEmpty(fromString) && !String.IsNullOrEmpty(toString))
             {
-            
+                Console.WriteLine(fromString + toString);
+                flightList = flights.Where(s => (s.From.Contains(fromString))
+                                           && s.To.Contains(toString)).ToList();
+                if (!String.IsNullOrEmpty(preference))
+                {
+                    List<AirRoutes> airRoutes = new List<AirRoutes>();
+
                     AntlrInputStream inputStream = new AntlrInputStream(preference);
                     PreferenceLanguageLexer lexer = new PreferenceLanguageLexer(inputStream);
 
@@ -578,49 +581,25 @@ namespace Flight.Controllers
 
                     PreferenceLanguageParser parser = new PreferenceLanguageParser(commonTokenStream);
 
-                    BaseErrorListener baseErrorListener = new BaseErrorListener();
-                parser.AddErrorListener(new BaseErrorListener());
 
-                    try
+                    PreferenceLanguageParser.PreferenceContext preferenceContext = parser.preference();
+                    PreferenceVisitor visitor = new PreferenceVisitor(flightList);
+
+                    var list = visitor.Visit(preferenceContext);
+                    list.Sort((float[] row1, float[] row2) => (int)(row2[1] * 10000 - row1[1] * 10000));
+
+                    foreach (float[] row in list)
                     {
-                        PreferenceLanguageParser.PreferenceContext preferenceSetContext = parser.preference();
-
-                        PreferenceVisitor visitor = new PreferenceVisitor();
-                        visitor.Visit(preferenceSetContext);
-
-                        foreach (var pref in visitor.Preferences)
-                        {
-                            Console.WriteLine("pref " + pref.PreferenceParsedText);
-                        }
-                     }
-                    catch(Exception ex)
-                    {
-                         Console.WriteLine(ex);
+                        airRoutes.Add(flightList[(int)row[0]]);
                     }
 
+                    return View(airRoutes);
+                }
 
             }
 
-
-            
-
-            //Prefe
-            //SpeakParser.LineContext context
-            //Pre SpeakLexer.NameContext name = context.name();
-            //OpinionContext opinion = context.opinion();
-
-            //SpeakLine line = new SpeakLine() { Person = name.GetText(), Text = opinion.GetText().Trim('"') };
-            //Lines.Add(line);
-
-            //line;
-            //Prefere
-
-            //Console.WriteLine("preferences" + preference);
-
-            return View();
-
+            return View(flightList);
         }
 
     }
-
 }

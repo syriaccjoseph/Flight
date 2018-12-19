@@ -20,6 +20,7 @@ namespace Flight.Models
         [Display(Name = "Arrival Date"), DataType(DataType.Date)]
         public DateTime arrival { get; set; }
 
+        [Display(Name = "Seats Available"), DataType(DataType.Text)]
         public string seatsAvailable { get; set; }
     }
 }
