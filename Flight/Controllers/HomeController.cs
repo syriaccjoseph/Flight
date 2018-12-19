@@ -583,7 +583,7 @@ namespace Flight.Controllers
 
                     try
                     {
-                        PreferenceLanguageParser.PreferenceSetContext preferenceSetContext = parser.preferenceSet();
+                        PreferenceLanguageParser.PreferenceContext preferenceSetContext = parser.preference();
 
                         PreferenceVisitor visitor = new PreferenceVisitor();
                         visitor.Visit(preferenceSetContext);

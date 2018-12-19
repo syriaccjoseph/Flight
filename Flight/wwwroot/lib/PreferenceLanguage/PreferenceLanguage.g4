@@ -5,32 +5,34 @@
  */
  
 
+
  
-    preferenceSet       :   setFormat1
-                          | setFormat2
-                          | setFormat3
-                          | preferenceSet SEPARATOR preferenceSet;
-
-
-    setFormat1          : '(' (preference SEPARATOR preference) ')';
-                        
-    setFormat2          : setFormat1 SEPARATOR preference;
-
-    setFormat3          : preference SEPARATOR setFormat1;
-                        
-    preference          :   TEXT ;
+preference            : '(' preference ')'
+                      | preference AND preference
+                      | preference OR preference
+                      | preference COMPROMISE preference
+                      | PREFERENCE_NAME  FROM   FROM_VAL   TO   TO_VAL ;
+                          
     
 /*
  * Lexer Rules
  */
  
-NAME : 'ADSFA';
-// and may follow with any number of alphanumerical characters"
+ 
+FROM                        : 'FROM' | 'from';
+TO                          : 'TO' | 'to';
+ 
+AND                         : 'AND' | 'and';
+OR                          : 'OR' | 'or' ;
+COMPROMISE                  : 'COMPROMISE' | 'compromise' ;
 
-SEPARATOR           : 'AND' | 'and' | 'OR' | 'or' | 'compromise' | 'COMPROMISE';
-TEXT
-    : [a-z]*
-    ;
+PREFERENCE_NAME             : [a-zA-Z]+ ;
+
+VAL                         : '0' 
+                            | [1-9] [0-9]*;
+                            
+FROM_VAL                    : VAL  ;
+TO_VAL                      : VAL ;
 
 
-WHITESPACE          : (' '|'\t')+ -> skip ;
+WHITESPACE          : (' ' | '\t')+ -> skip ;

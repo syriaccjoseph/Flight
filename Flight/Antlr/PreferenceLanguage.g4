@@ -5,22 +5,31 @@
  */
  
 
- 
-    preferenceSet       :   setFormat1
-                          | setFormat2;
 
-    setFormat1          : '(' (preference SEPARATOR preference) ')';       
-    setFormat2          : setFormat1 (SEPARATOR setFormat1)* (SEPARATOR preference)?;
-    
-    preference          : TEXT ;
+ 
+preference            : '(' preference ')'
+                      | preference AND preference
+                      | preference OR preference
+                      | preference COMPROMISE preference
+                      | PREFERENCE_NAME  FROM   FROM_VAL TO  FROM_VAL ;
+                          
     
 /*
  * Lexer Rules
  */
  
+ 
+FROM                        : 'FROM' | 'from';
+TO                          : 'TO' | 'to';
+ 
+AND                         : 'AND' | 'and';
+OR                          : 'OR' | 'or' ;
+COMPROMISE                  : 'COMPROMISE' | 'compromise' ;
 
-SEPARATOR           : 'AND' | 'and' | 'OR' | 'or' | 'compromise' | 'COMPROMISE' ;
-TEXT                : ('a'.. 'z')+ ;
+PREFERENCE_NAME             : [a-zA-Z]+ ;
+
+                            
+FROM_VAL                    : ('0' .. '9')+ ;
 
 
 WHITESPACE          : (' ' | '\t')+ -> skip ;
