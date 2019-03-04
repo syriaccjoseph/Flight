@@ -35,15 +35,7 @@
   </ItemGroup>
   
          
-
-  <ItemGroup>
-    <Compile Include="obj\Debug\netcoreapp2.1\C3POBaseListener.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\C3POBaseVisitor.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\C3POLexer.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\C3POListener.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\C3POParser.cs" />
-    <Compile Include="obj\Debug\netcoreapp2.1\C3POVisitor.cs" />
-  </ItemGroup>
+         
   <ItemGroup>
     <None Remove="Antlr\C3P0.txt" />
     <None Remove="Views\Home\lib\antlr4\.DS_Store" />
@@ -56,12 +48,6 @@
   <ItemGroup>
     <Antlr4 Remove="wwwroot\js\PreferenceLanguage.g4" />
     <Antlr4 Remove="wwwroot\lib\PreferenceLanguage\PreferenceLanguage.g4" />
-  </ItemGroup>
-    
-  <ItemGroup>
-    <Antlr4 Include="Antlr\C3PO.g4">
-      <Generator>Build:Compile</Generator>
-    </Antlr4>
   </ItemGroup>
     
   <ItemGroup>
